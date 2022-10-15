@@ -4,18 +4,16 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from bot_commands import *
 
 
-async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(f'Hello {update.effective_user.first_name}')
+updater = Updater('5475741775:AAEj-V5MeUCiKh6PIfMJxoXIqR_U-3hIWks')
 
+updater.dispatcher.add_handler(CommandHandler("hello", hi_command))
+updater.dispatcher.add_handler(CommandHandler("time", time_command))
+updater.dispatcher.add_handler(CommandHandler("help", help_command))
+# updater.dispatcher.add_handler(CommandHandler("sum", sum_command))
 
-app = ApplicationBuilder().token("5475741775:AAEj-V5MeUCiKh6PIfMJxoXIqR_U-3hIWks").build()
-
-app.add_handler(CommandHandler("hello", hi_command))
-app.add_handler(CommandHandler("time", time_command))
-app.add_handler(CommandHandler("help", help_command))
-app.add_handler(CommandHandler("hello", hi_command))
-
-app.run_polling()
+print('server start')
+updater.start_polling()
+updater.idle()
 
 
 # import matplotlib.pyplot as plt
